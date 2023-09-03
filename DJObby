@@ -5,6 +5,8 @@ local Window = OrionLib:MakeWindow({Name = "BaconBoss Hub | Rob DJ Khaleds Mansi
 
 _G.obby = true
 _G.time = true
+getgenv().tpPlace = "string"
+_G.gem = true
 
 function obby()
      while _G.obby == true do
@@ -31,6 +33,18 @@ function time()
     end
 end
 
+function Teleport(teleportPlace)
+    local player = game.Players.LocalPlayer
+    player.Character.HumanoidRootPart.CFrame = teleportPlace
+end
+
+function gem()
+     while _G.gem == true do
+        Teleport(game:GetService("Workspace").GameAssets.Money.Diamond.TouchPart.CFrame)
+        wait(0.1)
+    end
+end
+
 local MainTab = Window:MakeTab({
 	Name = "Main",
 	Icon = "rbxassetid://4483345998",
@@ -52,6 +66,16 @@ MainTab:AddToggle({
 	Callback = function(Value)
 		_G.time = Value
         time()
+	end    
+})
+
+
+MainTab:AddToggle({
+	Name = "Auto Collect Diamond",
+	Default = false,
+	Callback = function(Value)
+        _G.gem = Value
+        gem()
 	end    
 })
 
