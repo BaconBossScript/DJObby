@@ -1,0 +1,58 @@
+if game.PlaceId == 14372571594 then
+ 
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "BaconBoss Hub | Rob DJ Khaleds Mansion Obby!", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+
+_G.obby = true
+_G.time = true
+
+function obby()
+     while _G.obby == true do
+        local id  = 14543491988
+        for i,v in pairs(game:GetDescendants()) do
+       if v:IsA("RemoteEvent") then
+        v:FireServer(id)
+        if v:IsA("BindableEvent") then
+        v:Fire(id)
+        if v:IsA("RemoteFunction") then
+        v:InvokeServer(id)
+       end
+       end
+       end
+       end 
+     wait(0.0000000000001)
+    end
+end
+
+function time()
+      while _G.time == true do
+        game:GetService("ReplicatedStorage").RepStorage.UGC.TimeChanged:FireServer()
+        wait(0.000000000000000001)
+    end
+end
+
+local MainTab = Window:MakeTab({
+	Name = "Main",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+MainTab:AddToggle({
+	Name = "Auto Obby",
+	Default = false,
+	Callback = function(Value)
+		_G.obby = Value
+        obby()
+	end    
+})
+
+MainTab:AddToggle({
+	Name = "Skip Time",
+	Default = false,
+	Callback = function(Value)
+		_G.time = Value
+        time()
+	end    
+})
+
+end
