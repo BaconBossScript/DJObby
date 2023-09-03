@@ -20,7 +20,7 @@ function obby()
        end
        end
        end 
-     wait(0.5)
+     wait(2)
     end
 end
 
